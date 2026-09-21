@@ -272,6 +272,14 @@
   .summary .total { border-top: 1px solid var(--ink-line); padding-top: 14px; display: flex; justify-content: space-between; align-items: baseline; }
   .summary .total b { font-family: var(--serif); font-size: 34px; font-variant-numeric: tabular-nums; }
   .summary .fine { font-size: 13px; color: var(--on-ink-dim); line-height: 1.6; }
+  #others-field { display: grid; gap: 10px; }
+  .others-head { font-weight: 700; font-size: 15px; }
+  #others-list { display: grid; gap: 10px; }
+  .other-row { display: grid; grid-template-columns: 84px 1fr; align-items: center; gap: 10px; }
+  .other-row span { font-size: 14px; color: var(--on-paper-dim); }
+  .other-row input { font: 400 17px var(--sans); padding: 12px 14px; border: 1px solid var(--paper-line); background: #fff; color: var(--on-paper); width: 100%; }
+  .other-row input:focus { outline: 2px solid var(--red); outline-offset: -1px; border-color: var(--red); }
+  .other-row.bad input { border-color: var(--red); }
   .consent { display: flex !important; gap: 12px; align-items: flex-start; font-weight: 400 !important; font-size: 14px !important; line-height: 1.6; color: var(--on-paper-dim); cursor: pointer; }
   .consent input { width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--red); flex: none; }
   .btn:disabled { opacity: .6; cursor: wait; transform: none; }
@@ -637,6 +645,10 @@
             <button type="button" id="qty-plus" aria-label="增加人数">+</button>
           </div>
         </div>
+        <div id="others-field" hidden>
+          <div class="others-head">其他学员姓名</div>
+          <div id="others-list"></div>
+        </div>
         <div class="field">
           <label for="f-name">姓名 Name <i>*</i></label>
           <input id="f-name" name="name" autocomplete="name" required>
@@ -688,7 +700,7 @@
      turn on "Let customers adjust quantity" (min 2). When early bird
      ends, swap in the regular-price links and update PRICES. */
   const STRIPE_LINKS = {
-    single: "",  // e.g. https://buy.stripe.com/xxxxxxxx
+    single: "https://buy.stripe.com/dRmcN6e1CbYeedgeuu08g01",
     group:  ""   // e.g. https://buy.stripe.com/yyyyyyyy
   };
   // Google Sheet: paste the Apps Script "Web app" URL (ends in /exec)
@@ -703,11 +715,37 @@
 
   function currentPlan() { return form.elements.plan.value; }
 
+  // Group plan: one name box per extra attendee (the person filling the form is #1). Keeps what's typed when the count changes.
+  function renderOthers(plan, n) {
+    const wrap = document.getElementById("others-field");
+    const list = document.getElementById("others-list");
+    wrap.hidden = plan !== "group";
+    if (wrap.hidden) { list.innerHTML = ""; return; }
+    const kept = [...list.querySelectorAll("input")].map(i => i.value);
+    list.innerHTML = "";
+    for (let i = 2; i <= n; i++) {
+      const row = document.createElement("div");
+      row.className = "other-row";
+      const label = document.createElement("span");
+      label.textContent = "第 " + i + " 位";
+      const input = document.createElement("input");
+      input.id = "f-other-" + i;
+      input.name = "other" + i;
+      input.placeholder = "姓名 Name";
+      input.autocomplete = "off";
+      input.value = kept[i - 2] || "";
+      label.setAttribute("for", input.id);
+      row.append(label, input);
+      list.append(row);
+    }
+  }
+
   function renderSummary() {
     const plan = currentPlan();
     const n = plan === "group" ? qty : 1;
     document.getElementById("qty-field").hidden = plan !== "group";
     document.getElementById("qty").textContent = qty;
+    renderOthers(plan, n);
     document.getElementById("s-plan").textContent = PLAN_NAMES[plan];
     document.getElementById("s-unit").textContent = "RM" + PRICES[plan];
     document.getElementById("s-qty").textContent = n;
@@ -772,6 +810,19 @@
     e.preventDefault();
     notice.classList.remove("show");
     let ok = validate();
+    const others = [...document.querySelectorAll("#others-list input")];
+    let firstBadOther = null;
+    others.forEach(input => {
+      const bad = input.value.trim().length < 2;
+      input.closest(".other-row").classList.toggle("bad", bad);
+      if (bad && !firstBadOther) firstBadOther = input;
+    });
+    if (firstBadOther) {
+      ok = false;
+      notice.textContent = "请填写每一位学员的姓名。";
+      notice.classList.add("show");
+      firstBadOther.focus();
+    }
     const consentField = consent.closest(".field");
     consentField.classList.toggle("bad", !consent.checked);
     consentField.querySelector(".err").textContent = consent.checked ? "" : "请勾选同意，才能继续报名";
@@ -783,7 +834,8 @@
     const f = form.elements;
     const data = {
       name: f.name.value.trim(), phone: f.phone.value.trim(), email: f.email.value.trim(),
-      company: f.company.value.trim(), plan: PLAN_NAMES[plan], qty: n, total: PRICES[plan] * n
+      company: f.company.value.trim(), plan: PLAN_NAMES[plan], qty: n, total: PRICES[plan] * n,
+      others: others.map(i => i.value.trim()).filter(Boolean).join("、")
     };
 
     submitBtn.disabled = true;
