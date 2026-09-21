@@ -275,8 +275,11 @@
   #others-field { display: grid; gap: 10px; }
   .others-head { font-weight: 700; font-size: 15px; }
   #others-list { display: grid; gap: 10px; }
-  .other-row { display: grid; grid-template-columns: 84px 1fr; align-items: center; gap: 10px; }
-  .other-row span { font-size: 14px; color: var(--on-paper-dim); }
+  .other-card { display: grid; gap: 10px; padding: 16px; background: #fff; border: 1px solid var(--paper-line); }
+  .other-title { font-family: var(--serif); font-weight: 700; font-size: 17px; }
+  .other-row { display: grid; gap: 5px; }
+  .other-row label { font-size: 14px; color: var(--on-paper-dim); }
+  .other-row label i { font-style: normal; color: var(--red); }
   .other-row input { font: 400 17px var(--sans); padding: 12px 14px; border: 1px solid var(--paper-line); background: #fff; color: var(--on-paper); width: 100%; }
   .other-row input:focus { outline: 2px solid var(--red); outline-offset: -1px; border-color: var(--red); }
   .other-row.bad input { border-color: var(--red); }
@@ -717,28 +720,75 @@
   function currentPlan() { return form.elements.plan.value; }
 
   // Group plan: one name box per extra attendee (the person filling the form is #1). Keeps what's typed when the count changes.
+  const OTHER_FIELDS = [
+    { key: "name",    label: "姓名 Name",             type: "text",  required: true },
+    { key: "phone",   label: "联络号码 Contact No.",  type: "tel",   required: true },
+    { key: "email",   label: "电邮 Email",            type: "email", required: true },
+    { key: "company", label: "公司名称 Company",      type: "text",  required: false, hint: "与联络人同公司可留空" }
+  ];
+
+  // Group plan: a full set of details per extra attendee (the person filling the form is #1). Typed values survive a count change.
   function renderOthers(plan, n) {
     const wrap = document.getElementById("others-field");
     const list = document.getElementById("others-list");
     wrap.hidden = plan !== "group";
     if (wrap.hidden) { list.innerHTML = ""; return; }
-    const kept = [...list.querySelectorAll("input")].map(i => i.value);
+    const kept = {};
+    list.querySelectorAll("input").forEach(i => { kept[i.id] = i.value; });
     list.innerHTML = "";
     for (let i = 2; i <= n; i++) {
-      const row = document.createElement("div");
-      row.className = "other-row";
-      const label = document.createElement("span");
-      label.textContent = "第 " + i + " 位";
-      const input = document.createElement("input");
-      input.id = "f-other-" + i;
-      input.name = "other" + i;
-      input.placeholder = "姓名 Name";
-      input.autocomplete = "off";
-      input.value = kept[i - 2] || "";
-      label.setAttribute("for", input.id);
-      row.append(label, input);
-      list.append(row);
+      const card = document.createElement("div");
+      card.className = "other-card";
+      const head = document.createElement("div");
+      head.className = "other-title";
+      head.textContent = "第 " + i + " 位学员";
+      card.append(head);
+      OTHER_FIELDS.forEach(f => {
+        const id = "f-" + f.key + "-" + i;
+        const row = document.createElement("div");
+        row.className = "other-row";
+        const label = document.createElement("label");
+        label.setAttribute("for", id);
+        label.innerHTML = f.label + (f.required ? ' <i>*</i>' : "");
+        const input = document.createElement("input");
+        input.id = id;
+        input.type = f.type;
+        input.dataset.key = f.key;
+        input.dataset.person = i;
+        input.dataset.required = f.required ? "1" : "";
+        input.autocomplete = "off";
+        if (f.hint) input.placeholder = f.hint;
+        input.value = kept[id] || "";
+        row.append(label, input);
+        card.append(row);
+      });
+      list.append(card);
     }
+  }
+
+  function collectOthers() {
+    const cards = [...document.querySelectorAll("#others-list .other-card")];
+    return cards.map(card => {
+      const person = {};
+      card.querySelectorAll("input").forEach(i => { person[i.dataset.key] = i.value.trim(); });
+      return person;
+    });
+  }
+
+  function validateOthers() {
+    let first = null;
+    document.querySelectorAll("#others-list input").forEach(input => {
+      const v = input.value.trim();
+      let bad = false;
+      if (input.dataset.required) {
+        if (input.dataset.key === "email") bad = !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+        else if (input.dataset.key === "phone") bad = v.replace(/\D/g, "").length < 9;
+        else bad = v.length < 2;
+      }
+      input.closest(".other-row").classList.toggle("bad", bad);
+      if (bad && !first) first = input;
+    });
+    return first;
   }
 
   function renderSummary() {
@@ -817,16 +867,10 @@
     e.preventDefault();
     notice.classList.remove("show");
     let ok = validate();
-    const others = [...document.querySelectorAll("#others-list input")];
-    let firstBadOther = null;
-    others.forEach(input => {
-      const bad = input.value.trim().length < 2;
-      input.closest(".other-row").classList.toggle("bad", bad);
-      if (bad && !firstBadOther) firstBadOther = input;
-    });
+    const firstBadOther = validateOthers();
     if (firstBadOther) {
       ok = false;
-      notice.textContent = "请填写每一位学员的姓名。";
+      notice.textContent = "请填写每一位学员的姓名、联络号码和电邮。";
       notice.classList.add("show");
       firstBadOther.focus();
     }
@@ -839,10 +883,15 @@
     const plan = currentPlan();
     const n = plan === "group" ? qty : 1;
     const f = form.elements;
+    const company = f.company.value.trim();
+    const contact = { name: f.name.value.trim(), phone: f.phone.value.trim(), email: f.email.value.trim(), company };
+    const ref = "SZ13-" + new Date().toISOString().slice(0, 10).replace(/-/g, "") + "-" +
+                Math.random().toString(36).slice(2, 6).toUpperCase();
     const data = {
-      name: f.name.value.trim(), phone: f.phone.value.trim(), email: f.email.value.trim(),
-      company: f.company.value.trim(), plan: PLAN_NAMES[plan], qty: n, total: PRICES[plan] * n,
-      others: others.map(i => i.value.trim()).filter(Boolean).join("、")
+      ref, plan: PLAN_NAMES[plan], qty: n, total: PRICES[plan] * n,
+      ...contact,
+      // One entry per attendee; blank company on an extra attendee means "same as the contact person".
+      attendees: [contact, ...collectOthers().map(p => ({ ...p, company: p.company || company }))]
     };
 
     submitBtn.disabled = true;
@@ -859,8 +908,7 @@
       notice.classList.add("show");
       return;
     }
-    const ref = (data.company + "_" + data.name).replace(/[^A-Za-z0-9_-]/g, "").slice(0, 200);
-    location.href = link + "?prefilled_email=" + encodeURIComponent(data.email) + (ref ? "&client_reference_id=" + ref : "");
+    location.href = link + "?prefilled_email=" + encodeURIComponent(data.email) + "&client_reference_id=" + ref;
   });
 
   if (location.hash === "#register") openReg();
