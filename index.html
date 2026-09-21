@@ -689,6 +689,7 @@
       <div class="row"><span>单价</span><b id="s-unit">RM680</b></div>
       <div class="row"><span>人数</span><b id="s-qty">1</b></div>
       <div class="total"><span>总计</span><b id="s-total">RM680</b></div>
+      <p class="fine" id="qty-remind" hidden></p>
       <p class="fine">早鸟价已套用。原价单人 RM880 / 两人或以上每人 RM780。</p>
     </aside>
   </div>
@@ -701,7 +702,7 @@
      ends, swap in the regular-price links and update PRICES. */
   const STRIPE_LINKS = {
     single: "https://buy.stripe.com/dRmcN6e1CbYeedgeuu08g01",
-    group:  ""   // e.g. https://buy.stripe.com/yyyyyyyy
+    group:  "https://buy.stripe.com/aFa14o8Hi9Q63yC0DE08g02"
   };
   // Google Sheet: paste the Apps Script "Web app" URL (ends in /exec)
   const SHEET_URL = "https://script.google.com/macros/s/AKfycbynr7Nxm_h_Bld1yAZZBINZJz-HBaHjH_iYNivgJcoRpLAyXhCpRqqteqQmWZ18Sfic/exec";
@@ -750,6 +751,12 @@
     document.getElementById("s-unit").textContent = "RM" + PRICES[plan];
     document.getElementById("s-qty").textContent = n;
     document.getElementById("s-total").textContent = "RM" + (PRICES[plan] * n).toLocaleString("en-MY");
+    // Stripe can't be told the quantity through the link, so the buyer sets it on the payment page.
+    const remind = document.getElementById("qty-remind");
+    remind.hidden = plan !== "group";
+    remind.innerHTML = plan === "group"
+      ? '付款页的数量 (Quantity) 请调到 <b style="color:var(--gold)">' + n + '</b>，金额才会是 RM' + (PRICES[plan] * n).toLocaleString("en-MY") + '。'
+      : "";
   }
 
   function openReg(plan) {
