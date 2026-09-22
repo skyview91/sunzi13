@@ -272,6 +272,16 @@
   .summary .total { border-top: 1px solid var(--ink-line); padding-top: 14px; display: flex; justify-content: space-between; align-items: baseline; }
   .summary .total b { font-family: var(--serif); font-size: 34px; font-variant-numeric: tabular-nums; }
   .summary .fine { font-size: 13px; color: var(--on-ink-dim); line-height: 1.6; }
+  #done { display: grid; gap: 18px; margin-top: 28px; max-width: 34em; }
+  .done-mark { width: 56px; height: 56px; display: grid; place-items: center; background: var(--red); color: #fff; font-size: 30px; line-height: 1; }
+  .done-lead { font-family: var(--serif); font-weight: 900; font-size: clamp(22px, 3vw, 28px); line-height: 1.4; }
+  .done-next { font-size: 16px; line-height: 1.8; }
+  .done-card { display: grid; gap: 10px; background: #fff; border: 1px solid var(--paper-line); padding: 18px 20px; }
+  .done-card div { display: grid; grid-template-columns: 90px 1fr; gap: 12px; align-items: baseline; font-size: 15px; }
+  .done-card span { color: var(--on-paper-dim); }
+  .done-card b { font-weight: 700; }
+  .btn-back { justify-self: start; background: transparent; color: var(--on-paper); box-shadow: inset 0 0 0 1px var(--paper-line); }
+  .btn-back:hover { background: var(--paper-2); }
   #others-field { display: grid; gap: 10px; }
   .others-head { font-weight: 700; font-size: 15px; }
   #others-list { display: grid; gap: 10px; }
@@ -630,7 +640,7 @@
   </div>
   <div class="reg-body">
     <div>
-      <div class="steps"><span><b>1</b> 填写资料</span><span>2 付款</span><span>3 完成</span></div>
+      <div class="steps"><span><b>1</b> 填写资料</span><span>2 等待付款链接</span><span>3 完成</span></div>
       <h2 id="reg-title">报名 · 孙子十三战略班</h2>
       <form id="reg-form" novalidate>
         <div class="field">
@@ -680,9 +690,23 @@
           <span class="err"></span>
         </div>
         <div class="notice" id="notice"></div>
-        <button class="btn" type="submit">下一步：前往付款 <span class="arrow">→</span></button>
-        <p class="dim" style="font-size:13px">付款由 Stripe 安全处理。付款完成后，我们会以电邮及电话联系你确认上课详情。</p>
+        <button class="btn" type="submit">提交报名 <span class="arrow">→</span></button>
+        <p class="dim" style="font-size:13px">提交后，我们会把付款链接发到你的 WhatsApp 和电邮。付款完成，名额才正式确认。</p>
       </form>
+
+      <div id="done" hidden>
+        <div class="done-mark" aria-hidden="true">✓</div>
+        <p class="done-lead">我们已收到你的报名资料。</p>
+        <p class="done-next"><b>接下来：</b>我们的同事会在 <b>1 个工作天内</b>，把付款链接发到你填写的 <b>WhatsApp 号码和电邮</b>。完成付款后，名额才正式确认，我们会再发上课详情给你。</p>
+        <div class="done-card">
+          <div><span>报名编号</span><b id="done-ref"></b></div>
+          <div><span>报名方案</span><b id="done-plan"></b></div>
+          <div><span>课程</span><b>孙子十三战略班　24 &amp; 25 Nov 2026　9:30am – 5:30pm</b></div>
+          <div><span>地点</span><b>Kingston Hotel 10 @ Bukit Jalil</b></div>
+        </div>
+        <p class="dim" style="font-size:14px">两个工作天还没收到付款链接？把报名编号发给我们查一查就可以。</p>
+        <button class="btn btn-back" type="button" id="done-close">返回课程介绍</button>
+      </div>
     </div>
     <aside class="summary" aria-label="订单摘要">
       <div style="font-family:var(--serif);font-weight:900;font-size:20px">订单摘要</div>
@@ -693,7 +717,7 @@
       <div class="row"><span>人数</span><b id="s-qty">1</b></div>
       <div class="total"><span>总计</span><b id="s-total">RM680</b></div>
       <p class="fine" id="qty-remind" hidden></p>
-      <p class="fine">早鸟价已套用。原价单人 RM880 / 两人或以上每人 RM780。</p>
+      <p class="fine">早鸟价已套用。原价单人 RM880 / 两人或以上每人 RM780。<br>提交后我们会把付款链接发给你，付款后名额才确认。</p>
     </aside>
   </div>
 </div>
@@ -703,9 +727,11 @@
      Create one Payment Link per plan in Stripe. For the group link,
      turn on "Let customers adjust quantity" (min 2). When early bird
      ends, swap in the regular-price links and update PRICES. */
+  /* Payment is handled by hand for now: the team sends the payment link after the form comes in.
+     To switch back to paying on the spot, put the Stripe Payment Links back here. */
   const STRIPE_LINKS = {
-    single: "https://buy.stripe.com/dRmcN6e1CbYeedgeuu08g01",
-    group:  "https://buy.stripe.com/aFa14o8Hi9Q63yC0DE08g02"
+    single: "",
+    group:  ""
   };
   // Google Sheet: paste the Apps Script "Web app" URL (ends in /exec)
   const SHEET_URL = "https://script.google.com/macros/s/AKfycbynr7Nxm_h_Bld1yAZZBINZJz-HBaHjH_iYNivgJcoRpLAyXhCpRqqteqQmWZ18Sfic/exec";
@@ -803,7 +829,7 @@
     document.getElementById("s-total").textContent = "RM" + (PRICES[plan] * n).toLocaleString("en-MY");
     // Stripe can't be told the quantity through the link, so the buyer sets it on the payment page.
     const remind = document.getElementById("qty-remind");
-    remind.hidden = plan !== "group";
+    remind.hidden = plan !== "group" || !STRIPE_LINKS.group;
     remind.innerHTML = plan === "group"
       ? '付款页的数量 (Quantity) 请调到 <b style="color:var(--gold)">' + n + '</b>，金额才会是 RM' + (PRICES[plan] * n).toLocaleString("en-MY") + '。'
       : "";
@@ -827,6 +853,7 @@
   document.querySelectorAll("[data-register]").forEach(b =>
     b.addEventListener("click", () => openReg(b.dataset.register)));
   document.getElementById("reg-close").addEventListener("click", closeReg);
+  document.getElementById("done-close").addEventListener("click", closeReg);
   document.addEventListener("keydown", e => { if (e.key === "Escape" && !reg.hidden) closeReg(); });
   form.querySelectorAll('input[name="plan"]').forEach(r => r.addEventListener("change", renderSummary));
   document.getElementById("qty-minus").addEventListener("click", () => { qty = Math.max(2, qty - 1); renderSummary(); });
@@ -850,6 +877,17 @@
     }
     if (first) first.focus();
     return ok;
+  }
+
+  function showDone(data) {
+    document.getElementById("reg-form").hidden = true;
+    document.querySelector(".steps").innerHTML = '<span>1 填写资料</span><span><b>2</b> 等待付款链接</span><span>3 完成</span>';
+    document.getElementById("reg-title").textContent = "报名资料已收到";
+    const box = document.getElementById("done");
+    document.getElementById("done-ref").textContent = data.ref;
+    document.getElementById("done-plan").textContent = data.plan + "　" + data.qty + " 位　RM" + data.total.toLocaleString("en-MY");
+    box.hidden = false;
+    box.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   const consent = document.getElementById("f-consent");
@@ -899,15 +937,7 @@
     await saveToSheet(data);
 
     const link = STRIPE_LINKS[plan];
-    if (!link) {
-      submitBtn.disabled = false;
-      submitBtn.innerHTML = '下一步：前往付款 <span class="arrow">→</span>';
-      notice.textContent = SHEET_URL
-        ? "资料已记录。（预览版）Stripe 付款链接尚未设置，正式上线时会在这里带去 Stripe 付款页。"
-        : "（预览版）Google Sheet 和 Stripe 付款链接尚未设置。正式上线时，按下这个按钮会先记录资料，再带去 Stripe 付款页。";
-      notice.classList.add("show");
-      return;
-    }
+    if (!link) { showDone(data); return; }
     location.href = link + "?prefilled_email=" + encodeURIComponent(data.email) + "&client_reference_id=" + ref;
   });
 
