@@ -1,0 +1,731 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>孙子智慧，逆袭人生｜免费线上分享会</title>
+<meta name="description" content="免费 ZOOM 线上战略思维分享会｜10月27日 或 11月3日（二选一）星期二 8:30pm–10pm。你不是不够努力，而是还没看懂局。用《孙子兵法》重新看懂竞争、识人、领导与变化。">
+<meta property="og:title" content="孙子智慧，逆袭人生｜免费线上分享会">
+<meta property="og:description" content="你不是不够努力，而是还没看懂局。免费 ZOOM 线上分享会，10月27日或11月3日，二选一。">
+<meta property="og:image" content="../img/class-full.jpg">
+<link rel="icon" href="../img/logo-dark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@600;900&family=Noto+Sans+SC:wght@400;500;700&display=swap">
+<style>html{-webkit-text-size-adjust:100%}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<style>
+  /* Single deliberate look: ink + cinnabar + rice paper, taken from 孙企道's own banners */
+  :root {
+    --ink: #151313;
+    --ink-2: #211d1c;
+    --ink-line: #3a3332;
+    --paper: #f1eee8;
+    --paper-2: #e7e2d9;
+    --paper-line: #d3ccc0;
+    --red: #c8161d;
+    --red-deep: #9e1016;
+    --gold: #c9a86a;
+    --on-ink: #efebe4;
+    --on-ink-dim: #a9a09a;
+    --on-paper: #1c1918;
+    --on-paper-dim: #5f5752;
+    --brush: "Ma Shan Zheng", "STKaiti", "KaiTi", serif;
+    --serif: "Noto Serif SC", "Songti SC", "SimSun", serif;
+    --sans: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+    --wrap: 1120px;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--ink);
+    color: var(--on-ink);
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.85;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+  .wrap { max-width: var(--wrap); margin-inline: auto; padding-inline: 20px; }
+  section { padding-block: clamp(64px, 10vw, 120px); }
+  .ink { background: var(--ink); color: var(--on-ink); }
+  .paper { background: var(--paper); color: var(--on-paper); }
+  .paper .dim { color: var(--on-paper-dim); }
+  .ink .dim { color: var(--on-ink-dim); }
+
+  h1, h2, h3 { font-family: var(--serif); font-weight: 900; line-height: 1.3; margin: 0; text-wrap: balance; }
+  h2 { font-size: clamp(28px, 4.4vw, 44px); letter-spacing: .02em; }
+  h3 { font-size: clamp(20px, 2.4vw, 24px); font-weight: 600; }
+  p { margin: 0; }
+  .eyebrow {
+    font-size: 13px; letter-spacing: .28em; font-weight: 500;
+    color: var(--red); display: inline-flex; align-items: center; gap: 12px;
+  }
+  .eyebrow::before { content: ""; width: 28px; height: 2px; background: currentColor; }
+  .ink .eyebrow { color: #e0484e; }
+  .stack { display: grid; gap: 22px; }
+  .measure { max-width: 34em; }
+
+  /* ---------- buttons ---------- */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    font: 700 17px/1 var(--sans); letter-spacing: .08em;
+    padding: 18px 30px; border: 0; cursor: pointer; text-decoration: none;
+    background: var(--red); color: #fff;
+    transition: background .2s, transform .2s;
+  }
+  .btn:hover { background: var(--red-deep); transform: translateY(-1px); }
+  .btn .arrow { transition: transform .2s; }
+  .btn:hover .arrow { transform: translateX(4px); }
+  .btn-ghost { background: transparent; color: var(--on-ink); box-shadow: inset 0 0 0 1px var(--ink-line); }
+  .btn-ghost:hover { background: var(--ink-2); }
+
+  /* ---------- top bar ---------- */
+  .topbar {
+    position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+    background: rgba(21,19,19,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--ink-line);
+  }
+  .topbar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 12px; }
+  .topbar img { height: 38px; width: auto; }
+  .topbar .btn { padding: 12px 20px; font-size: 15px; }
+
+  /* ---------- hero ---------- */
+  .hero { padding-block: clamp(48px, 8vw, 96px) 0; position: relative; overflow: hidden; }
+  .hero-grid { display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: start; }
+  .hero h1 { font-size: clamp(46px, 8.6vw, 104px); letter-spacing: .04em; line-height: 1.12; }
+  .hero h1 .num { color: var(--red); }
+  .hero .sub { font-family: var(--serif); font-weight: 600; font-size: clamp(19px, 2.4vw, 26px); line-height: 1.6; max-width: 22em; }
+  .facts { display: flex; flex-wrap: wrap; gap: 0; border-top: 1px solid var(--ink-line); border-bottom: 1px solid var(--ink-line); max-width: 640px; }
+  .facts div { padding: 14px 22px 14px 0; margin-right: 22px; border-right: 1px solid var(--ink-line); }
+  .facts div:last-child { border-right: 0; margin-right: 0; }
+  .facts b { display: block; font-family: var(--serif); font-size: 28px; line-height: 1.2; color: var(--on-ink); }
+  .facts span { font-size: 13px; letter-spacing: .12em; color: var(--on-ink-dim); }
+  .hero-cta { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+  .hero-cta .price-hint { font-size: 14px; color: var(--on-ink-dim); }
+  .hero-cta .price-hint b { color: var(--gold); font-size: 18px; }
+
+  .motto {
+    writing-mode: vertical-rl; font-family: var(--brush); font-size: clamp(64px, 9vw, 124px);
+    line-height: 1.05; color: var(--on-ink); display: flex; gap: .15em; user-select: none;
+  }
+  .motto span:last-child { color: var(--red); }
+  .motto-src { writing-mode: vertical-rl; font-size: 12px; letter-spacing: .4em; color: var(--on-ink-dim); margin-top: 18px; }
+  .motto-col { display: flex; align-items: flex-start; gap: 10px; padding-top: 8px; }
+
+  .hero-photo { margin-top: clamp(48px, 7vw, 80px); position: relative; }
+  .hero-photo img { width: 100%; aspect-ratio: 16/9; object-fit: cover; object-position: 50% 80%; filter: saturate(.85); }
+  .when { display: flex; flex-wrap: wrap; gap: 6px 20px; font-size: 15px; color: var(--on-ink); }
+  .when span { display: inline-flex; gap: 8px; }
+  .when i { font-style: normal; color: var(--on-ink-dim); letter-spacing: .15em; }
+  .hero-photo figcaption { position: absolute; left: 20px; bottom: 16px; font-size: 13px; letter-spacing: .1em; color: #fff; text-shadow: 0 1px 8px rgba(0,0,0,.6); }
+
+  /* ---------- 13 chapters strip ---------- */
+  .chapters { background: var(--red); color: #fff; padding-block: 18px; overflow: hidden; }
+  .chapters ol {
+    list-style: none; margin: 0; padding: 0; display: flex; gap: 0; justify-content: space-between;
+    font-family: var(--serif); font-weight: 600; font-size: 15px; letter-spacing: .12em;
+    max-width: var(--wrap); margin-inline: auto; padding-inline: 20px; flex-wrap: wrap; row-gap: 6px;
+  }
+  .chapters li { white-space: nowrap; }
+  .chapters li + li::before { content: "·"; opacity: .5; margin-inline: 8px; }
+
+  /* ---------- intro ---------- */
+  .intro-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(32px, 6vw, 80px); align-items: start; }
+  .four-verbs { display: grid; grid-template-columns: repeat(2, 1fr); border-top: 2px solid var(--on-paper); }
+  .four-verbs div { padding: 20px 0 18px; border-bottom: 1px solid var(--paper-line); font-family: var(--serif); font-weight: 600; font-size: 20px; }
+  .four-verbs div:nth-child(odd) { padding-right: 16px; }
+  .four-verbs b { font-family: var(--brush); font-weight: 400; font-size: 44px; color: var(--red); margin-left: 4px; line-height: 1; vertical-align: -4px; }
+  .lede { font-family: var(--serif); font-weight: 900; font-size: clamp(24px, 3vw, 32px); line-height: 1.5; }
+
+  /* ---------- questions ---------- */
+  .q-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: clamp(32px, 6vw, 80px); align-items: start; }
+  .q-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--ink-line); }
+  .q-list li { display: flex; justify-content: space-between; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--ink-line); font-family: var(--serif); font-size: 19px; }
+  .q-list li::after { content: "？"; color: var(--red); font-weight: 900; }
+  .answer { border-left: 3px solid var(--red); padding-left: 20px; font-family: var(--serif); font-size: 20px; line-height: 1.7; }
+
+  /* ---------- roles ---------- */
+  .roles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 2px solid var(--on-paper); }
+  .role { padding: 28px 24px 30px 0; border-right: 1px solid var(--paper-line); }
+  .role + .role { padding-left: 24px; }
+  .role:last-child { border-right: 0; }
+  .role .who { font-family: var(--serif); font-weight: 900; font-size: 26px; margin-bottom: 8px; }
+  .role p { color: var(--on-paper-dim); }
+  .five { display: flex; flex-wrap: wrap; gap: 10px; }
+  .five span { font-family: var(--serif); font-weight: 600; font-size: 20px; padding: 10px 22px; background: var(--ink); color: var(--on-ink); }
+  .pull { font-family: var(--serif); font-weight: 900; font-size: clamp(24px, 3.4vw, 36px); line-height: 1.5; max-width: 22em; }
+  .pull em { font-style: normal; color: var(--red); }
+
+  /* ---------- curriculum ---------- */
+  .method { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; font-family: var(--serif); font-weight: 600; font-size: 20px; }
+  .method i { font-style: normal; color: var(--red); font-weight: 400; }
+  .pillars { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--ink-line); border: 1px solid var(--ink-line); }
+  .pillar { background: var(--ink); padding: clamp(28px, 4vw, 44px); display: grid; grid-template-columns: auto 1fr; gap: 8px 28px; align-content: start; }
+  .pillar .char { grid-row: span 4; font-family: var(--brush); font-size: clamp(72px, 9vw, 104px); line-height: .9; color: var(--red); }
+  .pillar .idx { font-size: 12px; letter-spacing: .3em; color: var(--on-ink-dim); }
+  .pillar h3 { color: var(--on-ink); }
+  .pillar p { color: var(--on-ink-dim); font-size: 16px; }
+  .pillar .tag { margin-top: 10px; font-family: var(--serif); font-weight: 600; color: var(--gold); font-size: 17px; }
+
+  /* ---------- not traditional + gallery ---------- */
+  .scenes { display: flex; flex-wrap: wrap; gap: 8px; }
+  .scenes span { font-size: 15px; padding: 6px 14px; border: 1px solid var(--paper-line); background: #fff; color: var(--on-paper); }
+  .gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .gallery img { width: 100%; aspect-ratio: 4/3; object-fit: cover; object-position: center 35%; }
+
+  /* ---------- mentors ---------- */
+  .mentors { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(28px, 4vw, 48px); }
+  .mentor { display: grid; grid-template-columns: 200px 1fr; gap: 24px; align-items: start; }
+  .mentor .photo { position: relative; background: var(--ink-2); }
+  .mentor .photo img { width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: top; }
+  .mentor .seal {
+    position: absolute; right: -14px; top: 14px; writing-mode: vertical-rl;
+    background: var(--red); color: #fff; font-family: var(--brush); font-size: 22px; padding: 10px 6px; line-height: 1.1;
+  }
+  .mentor .name { font-family: var(--serif); font-weight: 900; font-size: 28px; line-height: 1.25; }
+  .mentor .role-line { color: var(--gold); font-size: 15px; margin-top: 4px; }
+  .creds { list-style: none; margin: 16px 0 0; padding: 0; font-size: 15px; line-height: 1.6; }
+  .creds li { padding: 7px 0; border-bottom: 1px solid var(--ink-line); color: var(--on-ink-dim); }
+  .creds li:first-child { color: var(--on-ink); }
+
+  /* ---------- reflect ---------- */
+  .reflect { text-align: left; }
+  .again { display: grid; gap: 4px; font-family: var(--serif); font-weight: 900; font-size: clamp(30px, 5vw, 54px); line-height: 1.35; }
+  .again span b { color: var(--red); }
+
+  /* ---------- pricing ---------- */
+  .price-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 24px; }
+  .plans { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .plan { background: var(--ink-2); border: 1px solid var(--ink-line); padding: clamp(24px, 4vw, 40px); display: grid; gap: 18px; align-content: start; }
+  .plan.pick { border-color: var(--red); box-shadow: inset 0 3px 0 var(--red); }
+  .plan .label { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-family: var(--serif); font-weight: 900; font-size: 26px; }
+  .plan .badge { font: 700 12px/1 var(--sans); letter-spacing: .15em; background: var(--red); color: #fff; padding: 7px 10px; }
+  .plan .now { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .plan .now b { font-family: var(--serif); font-weight: 900; font-size: clamp(44px, 6vw, 60px); line-height: 1; color: var(--on-ink); font-variant-numeric: tabular-nums; }
+  .plan .now small { color: var(--on-ink-dim); font-size: 15px; }
+  .plan .was { color: var(--on-ink-dim); font-size: 15px; }
+  .plan .was s { color: var(--on-ink-dim); }
+  .plan .save { color: var(--gold); font-weight: 700; }
+  .plan .btn { width: 100%; }
+  .todo {
+    display: inline-block; font-size: 13px; padding: 3px 8px; letter-spacing: .05em;
+    border: 1px dashed var(--gold); color: var(--gold);
+  }
+  .event-meta { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--ink-line); border: 1px solid var(--ink-line); }
+  .event-meta div { background: var(--ink); padding: 18px 20px; }
+  .event-meta span { display: block; font-size: 12px; letter-spacing: .25em; color: var(--on-ink-dim); margin-bottom: 4px; }
+
+  footer { padding-block: 40px 110px; border-top: 1px solid var(--ink-line); }
+  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; font-size: 13px; color: var(--on-ink-dim); }
+  footer img { height: 44px; width: auto; }
+
+  /* ---------- mobile sticky CTA ---------- */
+  .dock {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; display: none;
+    background: var(--ink); border-top: 1px solid var(--ink-line);
+    padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px));
+    align-items: center; justify-content: space-between; gap: 12px;
+  }
+  .dock .p { font-size: 13px; color: var(--on-ink-dim); line-height: 1.3; }
+  .dock .p b { display: block; color: var(--gold); font-size: 18px; font-family: var(--serif); }
+  .dock .btn { padding: 14px 22px; font-size: 15px; }
+
+  /* ---------- registration page ---------- */
+  .reg { position: fixed; inset: 0; z-index: 50; background: var(--paper); color: var(--on-paper); overflow-y: auto; }
+  .reg-bar { background: var(--ink); color: var(--on-ink); }
+  .reg-bar .wrap { display: flex; justify-content: space-between; align-items: center; padding-block: 12px; gap: 16px; }
+  .reg-bar img { height: 34px; width: auto; }
+  .back { background: none; border: 0; color: var(--on-ink); font: 500 15px var(--sans); cursor: pointer; padding: 8px 0; }
+  .reg-body { max-width: 980px; margin-inline: auto; padding: 48px 20px 80px; display: grid; grid-template-columns: 1fr 320px; gap: 40px; align-items: start; }
+  .steps { display: flex; gap: 20px; font-size: 13px; letter-spacing: .1em; color: var(--on-paper-dim); margin-bottom: 14px; }
+  .steps b { color: var(--red); }
+  .reg h2 { font-size: clamp(28px, 4vw, 38px); }
+  form { display: grid; gap: 20px; margin-top: 28px; }
+  .field { display: grid; gap: 6px; }
+  .field label { font-weight: 700; font-size: 15px; }
+  .field label i { font-style: normal; color: var(--red); }
+  .field input {
+    font: 400 17px var(--sans); padding: 14px 16px; border: 1px solid var(--paper-line);
+    background: #fff; color: var(--on-paper); border-radius: 0; width: 100%;
+  }
+  .field input:focus { outline: 2px solid var(--red); outline-offset: -1px; border-color: var(--red); }
+  .field .err { font-size: 13px; color: var(--red); min-height: 0; }
+  .field.bad input { border-color: var(--red); }
+  .plan-pick { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .plan-pick label { cursor: pointer; }
+  .plan-pick input { position: absolute; opacity: 0; pointer-events: none; }
+  .plan-pick .opt { border: 1px solid var(--paper-line); background: #fff; padding: 14px 16px; display: grid; gap: 2px; }
+  .plan-pick .opt b { font-family: var(--serif); font-size: 18px; }
+  .plan-pick .opt span { font-size: 14px; color: var(--on-paper-dim); }
+  .plan-pick input:checked + .opt { border-color: var(--red); box-shadow: inset 0 0 0 1px var(--red); }
+  .plan-pick input:focus-visible + .opt { outline: 2px solid var(--red); outline-offset: 2px; }
+  .qty { display: flex; align-items: center; gap: 0; width: max-content; border: 1px solid var(--paper-line); background: #fff; }
+  .qty button { width: 46px; height: 48px; border: 0; background: none; font-size: 22px; cursor: pointer; color: var(--on-paper); }
+  .qty output { min-width: 48px; text-align: center; font-weight: 700; font-size: 18px; }
+  .summary { background: var(--ink); color: var(--on-ink); padding: 28px; position: sticky; top: 24px; display: grid; gap: 14px; }
+  .summary .row { display: flex; justify-content: space-between; gap: 12px; font-size: 15px; color: var(--on-ink-dim); }
+  .summary .row b { color: var(--on-ink); font-weight: 500; }
+  .summary .total { border-top: 1px solid var(--ink-line); padding-top: 14px; display: flex; justify-content: space-between; align-items: baseline; }
+  .summary .total b { font-family: var(--serif); font-size: 34px; font-variant-numeric: tabular-nums; }
+  .summary .fine { font-size: 13px; color: var(--on-ink-dim); line-height: 1.6; }
+  #done { display: grid; gap: 18px; margin-top: 28px; max-width: 34em; }
+  .done-mark { width: 56px; height: 56px; display: grid; place-items: center; background: var(--red); color: #fff; font-size: 30px; line-height: 1; }
+  .done-lead { font-family: var(--serif); font-weight: 900; font-size: clamp(22px, 3vw, 28px); line-height: 1.4; }
+  .done-next { font-size: 16px; line-height: 1.8; }
+  .done-card { display: grid; gap: 10px; background: #fff; border: 1px solid var(--paper-line); padding: 18px 20px; }
+  .done-card div { display: grid; grid-template-columns: 90px 1fr; gap: 12px; align-items: baseline; font-size: 15px; }
+  .done-card span { color: var(--on-paper-dim); }
+  .done-card b { font-weight: 700; }
+  .btn-back { justify-self: start; background: transparent; color: var(--on-paper); box-shadow: inset 0 0 0 1px var(--paper-line); }
+  .btn-back:hover { background: var(--paper-2); }
+  #others-field { display: grid; gap: 10px; }
+  .others-head { font-weight: 700; font-size: 15px; }
+  #others-list { display: grid; gap: 10px; }
+  .other-card { display: grid; gap: 10px; padding: 16px; background: #fff; border: 1px solid var(--paper-line); }
+  .other-title { font-family: var(--serif); font-weight: 700; font-size: 17px; }
+  .other-row { display: grid; gap: 5px; }
+  .other-row label { font-size: 14px; color: var(--on-paper-dim); }
+  .other-row label i { font-style: normal; color: var(--red); }
+  .other-row input { font: 400 17px var(--sans); padding: 12px 14px; border: 1px solid var(--paper-line); background: #fff; color: var(--on-paper); width: 100%; }
+  .other-row input:focus { outline: 2px solid var(--red); outline-offset: -1px; border-color: var(--red); }
+  .other-row.bad input { border-color: var(--red); }
+  .consent { display: flex !important; gap: 12px; align-items: flex-start; font-weight: 400 !important; font-size: 14px !important; line-height: 1.6; color: var(--on-paper-dim); cursor: pointer; }
+  .consent input { width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--red); flex: none; }
+  .btn:disabled { opacity: .6; cursor: wait; transform: none; }
+  .notice { display: none; background: #fff4e0; border: 1px solid var(--gold); padding: 14px 16px; font-size: 15px; line-height: 1.6; }
+  .notice.show { display: block; }
+
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .motto-col { display: none; }
+    .intro-grid, .q-grid { grid-template-columns: 1fr; }
+    .mentors { grid-template-columns: 1fr; }
+    .reg-body { grid-template-columns: 1fr; }
+    .summary { position: static; order: -1; }
+  }
+  @media (max-width: 680px) {
+    body { font-size: 16px; }
+    .roles { grid-template-columns: 1fr; }
+    .role, .role + .role { padding: 22px 0; border-right: 0; border-bottom: 1px solid var(--paper-line); }
+    .pillars, .plans, .event-meta { grid-template-columns: 1fr; }
+    .pillar { grid-template-columns: 1fr; }
+    .pillar .char { grid-row: auto; }
+    .mentor { grid-template-columns: 130px 1fr; gap: 18px; }
+    .mentor .seal { font-size: 18px; right: -10px; }
+    .gallery { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+    .hero-photo img { aspect-ratio: 4/3; object-position: center; }
+    .topbar .btn { display: none; }
+    .dock { display: flex; }
+    .plan-pick { grid-template-columns: 1fr; }
+    .chapters ol { justify-content: flex-start; font-size: 14px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .btn, .btn .arrow { transition: none; }
+  }
+
+  /* ---------- webinar additions ---------- */
+  .pillars.three { grid-template-columns: repeat(2, 1fr); }
+  .bullets { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--on-paper); }
+  .bullets li { padding: 16px 0 16px 28px; border-bottom: 1px solid var(--paper-line); font-family: var(--serif); font-weight: 600; font-size: 19px; position: relative; line-height: 1.6; }
+  .bullets li::before { content: ""; position: absolute; left: 0; top: 27px; width: 12px; height: 2px; background: var(--red); }
+  .who-list { display: grid; grid-template-columns: repeat(2, 1fr); border-top: 2px solid var(--on-paper); }
+  .who-list div { padding: 22px 24px 22px 0; border-bottom: 1px solid var(--paper-line); }
+  .who-list div:nth-child(even) { padding-left: 24px; border-left: 1px solid var(--paper-line); }
+  .who-list b { display: block; font-family: var(--serif); font-weight: 900; font-size: 24px; margin-bottom: 4px; }
+  .who-list p { color: var(--on-paper-dim); }
+  .free-tag { font-family: var(--serif); font-weight: 900; color: var(--gold); font-size: 18px; }
+  .sessions { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .session { background: var(--ink-2); border: 1px solid var(--ink-line); border-top: 3px solid var(--red); padding: 28px; display: grid; gap: 6px; }
+  .session span { font-size: 12px; letter-spacing: .3em; color: var(--on-ink-dim); }
+  .session b { color: var(--on-ink); font-family: var(--serif); font-weight: 900; font-size: clamp(30px, 4vw, 40px); line-height: 1.2; }
+  .session small { font-size: 15px; color: var(--on-ink-dim); }
+  .mentors.two .mentor .creds li:nth-child(n+6) { display: none; }
+  @media (max-width: 680px) { .pillars.three, .sessions, .who-list { grid-template-columns: 1fr; } .who-list div:nth-child(even) { padding-left: 0; border-left: 0; } }
+  .signup-box { max-width: 560px; background: #fff; border: 1px solid var(--paper-line); padding: clamp(22px, 4vw, 36px); }
+  .signup-box form { margin-top: 0; }
+  #done { margin-top: 0; }
+  .signup-box .btn { width: 100%; }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a href="../"><img src="../img/logo-dark.png" alt="孙企道 SunZi Strategy"></a>
+    <a class="btn" href="#signup">免费报名 <span class="arrow">→</span></a>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero ink">
+    <div class="wrap hero-grid">
+      <div class="stack" style="gap:28px">
+        <span class="eyebrow">孙企道 · 免费线上战略思维分享会</span>
+        <h1>你不是不够努力，<br>而是还没<span class="num">看懂局</span></h1>
+        <p class="sub">用《孙子兵法》的智慧，重新看懂竞争、识人、领导与变化</p>
+        <div class="facts">
+          <div><b>免费</b><span>ZOOM 线上</span></div>
+          <div><b>二选一</b><span>10/27 · 11/3</span></div>
+          <div><b>4 看</b><span>局 · 人 · 势 · 变</span></div>
+        </div>
+        <div class="when">
+          <span><i>日期</i>10月27日 或 11月3日 2026（星期二，二选一）</span>
+          <span><i>时间</i>8:30pm – 10pm</span>
+          <span><i>形式</i>ZOOM 线上</span>
+        </div>
+        <div class="hero-cta">
+          <a class="btn" href="#signup">免费报名参加 <span class="arrow">→</span></a>
+          <a class="btn btn-ghost" href="#learn">看分享内容</a>
+        </div>
+      </div>
+      <div class="motto-col" aria-hidden="true">
+        <div class="motto"><span>先看局</span><span>再行动</span></div>
+        <div class="motto-src">《孙子兵法 · 始计篇》</div>
+      </div>
+    </div>
+    <figure class="hero-photo wrap" style="margin-bottom:0">
+      <img src="../img/class-full.jpg" alt="孙子十三战略班学员合照">
+      <figcaption>往届学员合照</figcaption>
+    </figure>
+  </section>
+
+  <!-- 13 chapters -->
+  <div class="chapters" aria-label="孙子兵法十三篇">
+    <ol>
+      <li>始计</li><li>作战</li><li>谋攻</li><li>军形</li><li>兵势</li><li>虚实</li><li>军争</li><li>九变</li><li>行军</li><li>地形</li><li>九地</li><li>火攻</li><li>用间</li>
+    </ol>
+  </div>
+
+  <!-- WHY -->
+  <section class="ink">
+    <div class="wrap q-grid">
+      <div class="stack">
+        <span class="eyebrow">问题在哪里</span>
+        <h2>很多时候，问题不只是能力，也不只是努力。</h2>
+        <p class="answer">而是你有没有<br>看懂眼前的局。</p>
+      </div>
+      <div class="stack">
+        <ul class="q-list">
+          <li>为什么有些人很努力，却始终无法突破</li>
+          <li>为什么有些老板每天忙个不停，企业却还是离不开自己</li>
+          <li>为什么有些管理者很有能力，却始终带不好团队</li>
+          <li>为什么同样一个机会，有人提前看见，有人总是错过</li>
+        </ul>
+        <p class="dim">两千五百年前，孙子研究的是战争。<br>但他留下的智慧，至今依然能帮助我们思考竞争、判断局势、理解人性，以及面对变化时如何做出选择。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTRO -->
+  <section class="paper">
+    <div class="wrap stack" style="gap:28px">
+      <span class="eyebrow">这一次</span>
+      <p class="pull">让我们重新认识《孙子兵法》。<br><em>不是为了背诵古文，</em><br>而是学习如何把智慧用在今天的现实生活中。</p>
+    </div>
+  </section>
+
+  <!-- 4 THINGS -->
+  <section class="ink" id="learn">
+    <div class="wrap stack" style="gap:40px">
+      <div class="stack">
+        <span class="eyebrow">分享内容</span>
+        <h2>这场分享会，你将重新思考四件事</h2>
+      </div>
+      <div class="pillars">
+        <article class="pillar">
+          <div class="char" aria-hidden="true">局</div>
+          <span class="idx">01 · 看局</span>
+          <h3>为什么努力，不一定有结果？</h3>
+          <p>当你还没看清环境、机会与风险，就急着行动，再多努力也可能用错方向。学习从不同角度观察局势，判断什么时候应该进、什么时候应该退。</p>
+        </article>
+        <article class="pillar">
+          <div class="char" aria-hidden="true">人</div>
+          <span class="idx">02 · 看人</span>
+          <h3>为什么事情做得成，却带不好人？</h3>
+          <p>合作、沟通与领导，从来不只是把事情交代清楚。学习理解人的想法、立场与行为，重新思考如何与不同的人相处及合作。</p>
+        </article>
+        <article class="pillar">
+          <div class="char" aria-hidden="true">势</div>
+          <span class="idx">03 · 看势</span>
+          <h3>为什么一个人的能力有限，团队却能创造更大的成果？</h3>
+          <p>真正的力量，不只是自己有多强。还包括如何整合资源、发挥团队优势，让个人的努力形成更大的力量。</p>
+        </article>
+        <article class="pillar">
+          <div class="char" aria-hidden="true">变</div>
+          <span class="idx">04 · 看变</span>
+          <h3>当原本的计划行不通，你该怎么办？</h3>
+          <p>市场会变，客户会变，人也会变。学习判断什么时候应该坚持，什么时候应该调整，而不是一味坚持原来的做法。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- NOT JUST -->
+  <section class="paper">
+    <div class="wrap intro-grid">
+      <div class="stack">
+        <span class="eyebrow">不只是分享</span>
+        <h2>这不只是一场关于《孙子兵法》的分享</h2>
+        <p class="measure">我们将从《孙子兵法》的经典智慧出发，结合真实案例与现实情境，一起思考：</p>
+        <p class="dim measure">你不需要有军事知识，也不需要读过《孙子兵法》。<br>只要你每天都需要做决定，这些问题就与你有关。</p>
+      </div>
+      <ul class="bullets">
+        <li>为什么有些决策看起来正确，最后却带来错误的结果？</li>
+        <li>如何判断一个机会值得投入，还是应该放弃？</li>
+        <li>面对不同的人，应该如何调整自己的做法？</li>
+        <li>当环境改变时，如何重新判断下一步的方向？</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- WHO -->
+  <section class="ink">
+    <div class="wrap stack" style="gap:36px">
+      <div class="stack">
+        <span class="eyebrow">谁适合参加</span>
+        <h2>无论你现在处于什么位置</h2>
+      </div>
+      <div class="who-list" style="border-top-color:var(--on-ink)">
+        <div style="border-color:var(--ink-line)"><b>企业老板</b><p class="dim">重新思考企业竞争、发展方向与资源配置。</p></div>
+        <div style="border-color:var(--ink-line)"><b>管理者</b><p class="dim">学习从不同角度理解团队、领导与执行问题。</p></div>
+        <div style="border-color:var(--ink-line)"><b>创业者</b><p class="dim">更有意识地判断机会、风险与竞争环境。</p></div>
+        <div style="border-color:var(--ink-line)"><b>职场人士</b><p class="dim">提升思考问题、处理关系与做出选择的能力。</p></div>
+      </div>
+      <p class="pull">战略思维，<br>都不应该只是<em>少数人</em>的能力。</p>
+    </div>
+  </section>
+
+  <!-- NOT TRADITIONAL -->
+  <section class="paper">
+    <div class="wrap stack" style="gap:36px">
+      <div class="intro-grid">
+        <div class="stack">
+          <span class="eyebrow">分享风格</span>
+          <h2>这不是一堂传统的《孙子兵法》课程</h2>
+          <p class="measure">用《孙子兵法》，重新检查你的人生，找出影响你目前胜负的关键问题。</p>
+        </div>
+        <div class="stack">
+          <p class="measure">我们不会要求你背诵古文。<br>我们会把两千五百年前的智慧，放进今天你真正会遇到的场景。</p>
+          <div class="scenes"><span>企业经营</span><span>团队管理</span><span>职场发展</span><span>人际关系</span><span>竞争</span><span>决策</span><span>人生选择</span></div>
+          <p class="dim">让你发现：原来《孙子兵法》离我们并没有那么远。</p>
+        </div>
+      </div>
+      <div class="gallery">
+        <img src="../img/g6.jpg" alt="课堂讲解" loading="lazy">
+        <img src="../img/g3.jpg" alt="小组讨论" loading="lazy">
+        <img src="../img/g2.jpg" alt="学员上课" loading="lazy">
+        <img src="../img/g8.jpg" alt="导师授课" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- MENTORS -->
+  <section class="ink">
+    <div class="wrap stack" style="gap:44px">
+      <div class="stack">
+        <span class="eyebrow">导师介绍</span>
+        <h2>两位讲师，两个角度看兵法</h2>
+      </div>
+      <div class="mentors">
+        <article class="mentor">
+          <div class="photo"><img src="../img/roy.jpg" alt="Roy Mun"></div>
+          <div>
+            <div class="name">Roy Mun</div>
+            <div class="role-line">顾问、教练、企业家</div>
+            <ul class="creds">
+              <li>孙企道联合创办人</li>
+              <li>Bisston Academy 创始人</li>
+              <li>21 年企业管理经验</li>
+              <li>马来西亚 HRDC 认证培训师</li>
+              <li>KPI Institute 绩效管理认证 (C-PM)</li>
+              <li>SCRUM 认证高级人力资源管理</li>
+              <li>ICC 认证国际教练</li>
+              <li>伟事达 Vistage Malaysia resource speaker</li>
+              <li>BNI Shah Alam trainer</li>
+            </ul>
+          </div>
+        </article>
+        <article class="mentor">
+          <div class="photo"><img src="../img/teu.jpg" alt="张志松 Mentor Teu"></div>
+          <div>
+            <div class="name">张志松<br>Mentor Teu</div>
+            <div class="role-line">企业教练、企业家、孙子兵法导师</div>
+            <ul class="creds">
+              <li>孙企道联合创办人</li>
+              <li>认证企业教练</li>
+              <li>生命教练认证</li>
+              <li>供应链专家</li>
+              <li>大城堡华语国际讲演会会长（2022-2023）</li>
+              <li>个人理财专家</li>
+              <li>眼镜行业 20 年经验</li>
+              <li>36 场半马拉松完成者（2023、2024、2025）</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+      <p class="dim measure">两位讲师，从不同角度带你重新理解《孙子兵法》，把古代智慧连接到现代企业、工作与人生。</p>
+    </div>
+  </section>
+
+  <!-- SIGN UP -->
+  <section class="paper" id="signup">
+    <div class="wrap stack" style="gap:36px">
+      <div class="stack" style="gap:14px">
+        <span class="eyebrow">免费报名</span>
+        <h2>重新认识《孙子兵法》</h2>
+        <p class="dim">《孙子智慧，逆袭人生线上课程》</p>
+      </div>
+      <div class="sessions">
+        <div class="session"><span>场次 1</span><b>10月27日</b><small>2026 · 星期二 · 8:30pm – 10pm</small></div>
+        <div class="session"><span>场次 2</span><b>11月3日</b><small>2026 · 星期二 · 8:30pm – 10pm</small></div>
+      </div>
+      <p class="dim" style="margin-top:-12px">内容相同，两场选一场参加即可。</p>
+      <div class="event-meta" style="background:var(--paper-line);border-color:var(--paper-line)">
+        <div style="background:var(--paper)"><span>形式</span>ZOOM 线上分享会</div>
+        <div style="background:var(--paper)"><span>时间</span>8:30pm 到 10pm</div>
+        <div style="background:var(--paper)"><span>费用</span><b class="free-tag" style="color:var(--red)">免费</b></div>
+      </div>
+      <p class="lede measure">如果你不想每次遇到问题，都只能靠经验、直觉或不断尝试来寻找答案，不妨从这场分享会开始。<br><span style="color:var(--red)">先看清局，再决定怎么走。</span></p>
+
+      <div class="signup-box">
+        <form id="su-form" novalidate>
+          <div class="field">
+            <label>参加场次 <i>*</i></label>
+            <div class="plan-pick">
+              <label><input type="radio" name="session" value="10月27日" checked><span class="opt"><b>10月27日</b><span>星期二 · 8:30pm</span></span></label>
+              <label><input type="radio" name="session" value="11月3日"><span class="opt"><b>11月3日</b><span>星期二 · 8:30pm</span></span></label>
+            </div>
+          </div>
+          <div class="field">
+            <label for="f-name">姓名 Name <i>*</i></label>
+            <input id="f-name" name="name" autocomplete="name" required>
+            <span class="err"></span>
+          </div>
+          <div class="field">
+            <label for="f-phone">WhatsApp 号码 <i>*</i></label>
+            <input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="例：012-345 6789" required>
+            <span class="err"></span>
+          </div>
+          <div class="field">
+            <label for="f-email">电邮 Email <i>*</i></label>
+            <input id="f-email" name="email" type="email" autocomplete="email" required>
+            <span class="err"></span>
+          </div>
+          <div class="field">
+            <label for="f-company">公司名称 Company Name</label>
+            <input id="f-company" name="company" autocomplete="organization">
+          </div>
+          <div class="field">
+            <label class="consent" for="f-consent">
+              <input type="checkbox" id="f-consent" name="consent">
+              <span>我同意孙企道 SunZi Strategy 收集及使用以上资料，以处理我的报名并联系我有关分享会事宜（依据 PDPA 2010）。</span>
+            </label>
+            <span class="err"></span>
+          </div>
+          <div class="notice" id="notice"></div>
+          <button class="btn" type="submit">免费报名参加 <span class="arrow">→</span></button>
+          <p class="dim" style="font-size:13px">Zoom 链接之后会再发给你。</p>
+        </form>
+        <div id="done" hidden>
+          <div class="done-mark" aria-hidden="true">✓</div>
+          <p class="done-lead">报名成功，我们已收到你的资料。</p>
+          <p class="done-next"><b>接下来：</b>Zoom 链接之后会再发给你，请留意你的 <b>电邮和 WhatsApp</b>。记得把日期留起来。</p>
+          <div class="done-card">
+            <div><span>报名编号</span><b id="done-ref"></b></div>
+            <div><span>日期</span><b id="done-session"></b></div>
+            <div><span>时间</span><b>8:30pm – 10pm</b></div>
+            <div><span>形式</span><b>ZOOM 线上，免费</b></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEXT -->
+  <section class="ink">
+    <div class="wrap stack" style="gap:24px">
+      <span class="eyebrow">想要更完整的学习</span>
+      <h2>孙子十三战略班</h2>
+      <p class="dim measure">2天面授，24 &amp; 25 Nov 2026，Kingston Hotel 10 @ Bukit Jalil。把十三篇放回你的企业与团队。</p>
+      <div><a class="btn btn-ghost" href="../">了解十三战略班 <span class="arrow">→</span></a></div>
+    </div>
+  </section>
+</main>
+
+<footer class="ink">
+  <div class="wrap">
+    <img src="../img/logo-dark.png" alt="孙企道 SunZi Strategy">
+    <span>© 孙企道 SunZi Strategy</span>
+  </div>
+</footer>
+
+<div class="dock">
+  <div class="p">免费线上分享会<b>10/27 · 11/3</b></div>
+  <a class="btn" href="#signup">免费报名 →</a>
+</div>
+
+<script>
+  // Apps Script web app that appends webinar sign-ups to the Sheet (type: "webinar")
+  const WEBINAR_URL = "";
+
+  const form = document.getElementById("su-form");
+  const notice = document.getElementById("notice");
+  const consent = document.getElementById("f-consent");
+  const submitBtn = form.querySelector('button[type="submit"]');
+  const checks = {
+    name:  v => v.trim().length >= 2 || "请填写姓名",
+    phone: v => v.replace(/\D/g, "").length >= 9 || "请填写有效的 WhatsApp 号码",
+    email: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) || "请填写有效的电邮地址"
+  };
+  function validate() {
+    let ok = true, first = null;
+    for (const [k, fn] of Object.entries(checks)) {
+      const input = form.elements[k], res = fn(input.value), field = input.closest(".field");
+      const bad = res !== true;
+      field.classList.toggle("bad", bad);
+      field.querySelector(".err").textContent = bad ? res : "";
+      if (bad && !first) first = input;
+      ok = ok && !bad;
+    }
+    const cf = consent.closest(".field");
+    cf.classList.toggle("bad", !consent.checked);
+    cf.querySelector(".err").textContent = consent.checked ? "" : "请勾选同意，才能继续报名";
+    if (!consent.checked) { ok = false; if (!first) first = consent; }
+    if (first) first.focus();
+    return ok;
+  }
+  form.addEventListener("submit", async e => {
+    e.preventDefault();
+    notice.classList.remove("show");
+    if (!validate()) return;
+    const f = form.elements;
+    const ref = "SZW-" + new Date().toISOString().slice(0, 10).replace(/-/g, "") + "-" + Math.random().toString(36).slice(2, 6).toUpperCase();
+    const data = { type: "webinar", ref, session: f.session.value, name: f.name.value.trim(), phone: f.phone.value.trim(), email: f.email.value.trim(), company: f.company.value.trim() };
+    submitBtn.disabled = true;
+    submitBtn.textContent = "处理中…";
+    try {
+      if (!WEBINAR_URL) throw new Error("not connected");
+      await fetch(WEBINAR_URL, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(data) });
+    } catch (err) {
+      notice.textContent = "报名暂时没有成功，请稍后再试一次。";
+      notice.classList.add("show");
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = '免费报名参加 <span class="arrow">→</span>';
+      return;
+    }
+    form.hidden = true;
+    document.getElementById("done-ref").textContent = ref;
+    document.getElementById("done-session").textContent = data.session + " 2026（星期二）";
+    const box = document.getElementById("done");
+    box.hidden = false;
+    box.scrollIntoView({ behavior: "smooth", block: "center" });
+  });
+</script>
+</body>
+</html>
